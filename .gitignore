@@ -1,3 +1,11 @@
+# Environment & Secrets
+.env
+*.env
+.env.*
+*.key
+*.pem
+.vercel/
+
 # Miscellaneous
 *.class
 *.log
@@ -25,8 +33,7 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-/build/*
-!/build/web
+/build/
 /coverage/
 
 # Symbolication related
