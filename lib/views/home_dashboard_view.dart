@@ -226,47 +226,57 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
                     ),
                     const SizedBox(height: 12),
 
-                    GridView.count(
-                      crossAxisCount: 2,
+                    GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                      childAspectRatio: 1.15,
-                      children: [
-                        _buildActionCard(
-                          emoji: '🌸',
-                          title: 'Question or Symptom',
-                          subtitle: 'Check cramps, cycle dates, or flow',
-                          color: NivakinColors.blossomPinkBg,
-                          borderColor: NivakinColors.rosePink.withOpacity(0.3),
-                          onTap: () => state.navigateTo(AppScreen.intake),
-                        ),
-                        _buildActionCard(
-                          emoji: '💬',
-                          title: 'Ask Offline Gemma',
-                          subtitle: 'Zero data local Q&A chat',
-                          color: NivakinColors.softLilacBg,
-                          borderColor: NivakinColors.softLilac,
-                          onTap: () => state.navigateTo(AppScreen.offlineGemmaChat),
-                        ),
-                        _buildActionCard(
-                          emoji: '📝',
-                          title: 'Baat Kaise Karein?',
-                          subtitle: 'WhatsApp scripts for Mummy & Didi',
-                          color: const Color(0xFFDCF8C6).withOpacity(0.5),
-                          borderColor: const Color(0xFF25D366).withOpacity(0.4),
-                          onTap: () => state.navigateTo(AppScreen.scriptSandbox),
-                        ),
-                        _buildActionCard(
-                          emoji: '🩺',
-                          title: 'Doctor Visit Card',
-                          subtitle: '1-Page summary for clinic visits',
-                          color: const Color(0xFFFEF3C7),
-                          borderColor: NivakinColors.softAmber.withOpacity(0.4),
-                          onTap: () => state.navigateTo(AppScreen.doctorPrep),
-                        ),
-                      ],
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisExtent: 110,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
+                      ),
+                      itemCount: 4,
+                      itemBuilder: (context, index) {
+                        switch (index) {
+                          case 0:
+                            return _buildActionCard(
+                              emoji: '🌸',
+                              title: 'Question or Symptom',
+                              subtitle: 'Check cramps, cycle dates, or flow',
+                              color: NivakinColors.blossomPinkBg,
+                              borderColor: NivakinColors.rosePink.withOpacity(0.3),
+                              onTap: () => state.navigateTo(AppScreen.intake),
+                            );
+                          case 1:
+                            return _buildActionCard(
+                              emoji: '💬',
+                              title: 'Ask Offline Gemma',
+                              subtitle: 'Zero data local Q&A chat',
+                              color: NivakinColors.softLilacBg,
+                              borderColor: NivakinColors.softLilac,
+                              onTap: () => state.navigateTo(AppScreen.offlineGemmaChat),
+                            );
+                          case 2:
+                            return _buildActionCard(
+                              emoji: '📝',
+                              title: 'Baat Kaise Karein?',
+                              subtitle: 'WhatsApp scripts for Mummy & Didi',
+                              color: const Color(0xFFDCF8C6).withOpacity(0.5),
+                              borderColor: const Color(0xFF25D366).withOpacity(0.4),
+                              onTap: () => state.navigateTo(AppScreen.scriptSandbox),
+                            );
+                          case 3:
+                          default:
+                            return _buildActionCard(
+                              emoji: '🩺',
+                              title: 'Doctor Visit Card',
+                              subtitle: '1-Page summary for clinic visits',
+                              color: const Color(0xFFFEF3C7),
+                              borderColor: NivakinColors.softAmber.withOpacity(0.4),
+                              onTap: () => state.navigateTo(AppScreen.doctorPrep),
+                            );
+                        }
+                      },
                     ),
 
                     const SizedBox(height: 24),
@@ -382,7 +392,7 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
       onTap: onTap,
       borderRadius: BorderRadius.circular(NivakinRadius.card),
       child: Container(
-        padding: const EdgeInsets.all(14),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: color,
           borderRadius: BorderRadius.circular(NivakinRadius.card),
@@ -392,12 +402,14 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(emoji, style: const TextStyle(fontSize: 26)),
-            const SizedBox(height: 8),
+            Text(emoji, style: const TextStyle(fontSize: 20)),
+            const SizedBox(height: 4),
             Text(
               title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                fontSize: 14,
+                fontSize: 13,
                 fontWeight: FontWeight.bold,
                 color: NivakinColors.charcoalSlate,
               ),
@@ -408,7 +420,7 @@ class _HomeDashboardViewState extends State<HomeDashboardView> {
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                fontSize: 11,
+                fontSize: 10.5,
                 color: NivakinColors.textSubtle,
                 height: 1.2,
               ),

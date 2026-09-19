@@ -86,86 +86,96 @@ class _NivakinShell extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: NivakinColors.blossomWhite,
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
-        transitionBuilder: (child, animation) {
-          return FadeTransition(opacity: animation, child: child);
-        },
-        child: KeyedSubtree(
-          key: ValueKey(screen),
-          child: switch (screen) {
-            AppScreen.homeDashboard     => const HomeDashboardView(),
-            AppScreen.intake            => const IntakeView(),
-            AppScreen.confidence        => const ConfidenceView(),
-            AppScreen.offlineGemmaChat  => const OfflineGemmaChatView(),
-            AppScreen.scriptSandbox     => const ScriptSandboxView(),
-            AppScreen.doctorPrep        => const DoctorPrepView(),
-            AppScreen.emergency         => const EmergencyView(),
-            AppScreen.disguise          => const DisguiseView(),
-          },
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 640),
+          child: Column(
+            children: [
+              Expanded(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (child, animation) {
+                    return FadeTransition(opacity: animation, child: child);
+                  },
+                  child: KeyedSubtree(
+                    key: ValueKey(screen),
+                    child: switch (screen) {
+                      AppScreen.homeDashboard     => const HomeDashboardView(),
+                      AppScreen.intake            => const IntakeView(),
+                      AppScreen.confidence        => const ConfidenceView(),
+                      AppScreen.offlineGemmaChat  => const OfflineGemmaChatView(),
+                      AppScreen.scriptSandbox     => const ScriptSandboxView(),
+                      AppScreen.doctorPrep        => const DoctorPrepView(),
+                      AppScreen.emergency         => const EmergencyView(),
+                      AppScreen.disguise          => const DisguiseView(),
+                    },
+                  ),
+                ),
+              ),
+              if (!hideBottomNav)
+                Container(
+                  decoration: const BoxDecoration(
+                    color: NivakinColors.cardWhite,
+                    border: Border(top: BorderSide(color: NivakinColors.borderSoft)),
+                  ),
+                  child: NavigationBar(
+                    selectedIndex: _getSelectedIndex(screen),
+                    onDestinationSelected: (index) {
+                      switch (index) {
+                        case 0:
+                          state.navigateTo(AppScreen.homeDashboard);
+                          break;
+                        case 1:
+                          state.navigateTo(AppScreen.intake);
+                          break;
+                        case 2:
+                          state.navigateTo(AppScreen.offlineGemmaChat);
+                          break;
+                        case 3:
+                          state.navigateTo(AppScreen.scriptSandbox);
+                          break;
+                        case 4:
+                          state.navigateTo(AppScreen.doctorPrep);
+                          break;
+                      }
+                    },
+                    backgroundColor: NivakinColors.cardWhite,
+                    indicatorColor: NivakinColors.blossomPinkBg,
+                    elevation: 0,
+                    height: 64,
+                    destinations: const [
+                      NavigationDestination(
+                        icon: Icon(Icons.home_outlined, color: NivakinColors.textSubtle),
+                        selectedIcon: Icon(Icons.home_rounded, color: NivakinColors.rosePink),
+                        label: 'Home',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.favorite_outline, color: NivakinColors.textSubtle),
+                        selectedIcon: Icon(Icons.favorite_rounded, color: NivakinColors.rosePink),
+                        label: 'Intake',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.chat_bubble_outline_rounded, color: NivakinColors.textSubtle),
+                        selectedIcon: Icon(Icons.chat_bubble_rounded, color: NivakinColors.purpleAccent),
+                        label: 'Gemma Q&A',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.forum_outlined, color: NivakinColors.textSubtle),
+                        selectedIcon: Icon(Icons.forum_rounded, color: NivakinColors.rosePink),
+                        label: 'Baat Karein',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.medical_services_outlined, color: NivakinColors.textSubtle),
+                        selectedIcon: Icon(Icons.medical_services_rounded, color: NivakinColors.softAmber),
+                        label: 'Doctor Card',
+                      ),
+                    ],
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
-      bottomNavigationBar: hideBottomNav
-          ? null
-          : Container(
-              decoration: const BoxDecoration(
-                color: NivakinColors.cardWhite,
-                border: Border(top: BorderSide(color: NivakinColors.borderSoft)),
-              ),
-              child: NavigationBar(
-                selectedIndex: _getSelectedIndex(screen),
-                onDestinationSelected: (index) {
-                  switch (index) {
-                    case 0:
-                      state.navigateTo(AppScreen.homeDashboard);
-                      break;
-                    case 1:
-                      state.navigateTo(AppScreen.intake);
-                      break;
-                    case 2:
-                      state.navigateTo(AppScreen.offlineGemmaChat);
-                      break;
-                    case 3:
-                      state.navigateTo(AppScreen.scriptSandbox);
-                      break;
-                    case 4:
-                      state.navigateTo(AppScreen.doctorPrep);
-                      break;
-                  }
-                },
-                backgroundColor: NivakinColors.cardWhite,
-                indicatorColor: NivakinColors.blossomPinkBg,
-                elevation: 0,
-                height: 64,
-                destinations: const [
-                  NavigationDestination(
-                    icon: Icon(Icons.home_outlined, color: NivakinColors.textSubtle),
-                    selectedIcon: Icon(Icons.home_rounded, color: NivakinColors.rosePink),
-                    label: 'Home',
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.favorite_outline, color: NivakinColors.textSubtle),
-                    selectedIcon: Icon(Icons.favorite_rounded, color: NivakinColors.rosePink),
-                    label: 'Intake',
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.chat_bubble_outline_rounded, color: NivakinColors.textSubtle),
-                    selectedIcon: Icon(Icons.chat_bubble_rounded, color: NivakinColors.purpleAccent),
-                    label: 'Gemma Q&A',
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.forum_outlined, color: NivakinColors.textSubtle),
-                    selectedIcon: Icon(Icons.forum_rounded, color: NivakinColors.rosePink),
-                    label: 'Baat Karein',
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.medical_services_outlined, color: NivakinColors.textSubtle),
-                    selectedIcon: Icon(Icons.medical_services_rounded, color: NivakinColors.softAmber),
-                    label: 'Doctor Card',
-                  ),
-                ],
-              ),
-            ),
     );
   }
 }
