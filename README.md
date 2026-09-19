@@ -20,7 +20,7 @@
 
 120M+ teenage girls in South Asia experience menarche without private, taboo-free health guidance. Fear of stigma, lack of internet access, and disclosure anxiety prevent them from asking family members or seeking timely clinical advice.
 
-### 🌟 5 Core Non-Negotiables
+### 🌟 5 Core Unique Selling Points:
 1. **Zero Diagnostic Speculation:** Never outputs disease labels (PCOS, endometriosis) or drug dosages. Grade 5–6 reading level orientation.
 2. **On-Device Offline Gemma Engine:** Zero-latency Q&A via MediaPipe Gemma 2B INT4 and pre-cached developmental intent database. Zero server logs.
 3. **3-Bucket Confidence Engine:** Structured output dividing results into **Lilac** (What We Know), **Blossom Pink** (What's Normal & Myths), and **Soft Amber** (Doctor Boundaries).
