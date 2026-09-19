@@ -82,5 +82,5 @@ flutter build web --release
 
 <p align="center">
   <b>Live Demo:</b> <a href="https://nivakin-health.vercel.app/">https://nivakin-health.vercel.app/</a><br>
-  Made with 🌸 for young girls across India & South Asia.
+  Made with 🌸 for young girls across the world.
 </p>
